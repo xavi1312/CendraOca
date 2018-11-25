@@ -1,0 +1,10 @@
+$celda-size: 3em;
+.tablero{
+  display: grid;
+  grid-template-columns: repeat(8, $celda-size);
+  grid-template-rows: repeat(8, $celda-size);
+}
+.tablero__celda{
+  background-color: var(--background);
+  border: 1px solid red;
+}

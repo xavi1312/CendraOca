@@ -1,0 +1,40 @@
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body {
+  margin: 0; }
+
+:root {
+  --background: lightblue; }
+
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(8, 3em);
+  grid-template-rows: repeat(8, 3em); }
+
+.tablero__celda {
+  background-color: var(--background);
+  border: 1px solid red; }
+
+/*
+.tablero__celda--5,
+.tablero__celda--9,
+.tablero__celda--14,
+.tablero__celda--18,
+.tablero__celda--23,
+.tablero__celda--27,
+.tablero__celda--32,
+.tablero__celda--36,
+.tablero__celda--41,
+.tablero__celda--45,
+.tablero__celda--50,
+.tablero__celda--54,
+.tablero__celda--59,
+{
+  background-image: url($oca_background);
+  background-size: cover;
+  background-repeat: no-repeat;
+}*/

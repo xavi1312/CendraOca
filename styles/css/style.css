@@ -1,3 +1,6 @@
+:root {
+  --background: lightblue; }
+
 *,
 *:before,
 *:after {
@@ -7,19 +10,18 @@
 body {
   margin: 0; }
 
-:root {
-  --background: lightblue; }
-
 .tablero {
   display: grid;
-  grid-template-columns: repeat(8, 3em);
-  grid-template-rows: repeat(8, 3em); }
+  grid-template-columns: repeat(8, 5em);
+  grid-template-rows: repeat(8, 5em); }
 
 .tablero__celda {
   background-color: var(--background);
   border: 1px solid red; }
 
-/*
+.tablero__celda--1 {
+  grid-column: span 2; }
+
 .tablero__celda--5,
 .tablero__celda--9,
 .tablero__celda--14,
@@ -32,9 +34,38 @@ body {
 .tablero__celda--45,
 .tablero__celda--50,
 .tablero__celda--54,
-.tablero__celda--59,
-{
-  background-image: url($oca_background);
+.tablero__celda--59 {
+  background-image: url("https://bit.ly/2DVMlqa");
   background-size: cover;
-  background-repeat: no-repeat;
-}*/
+  background-repeat: no-repeat; }
+
+.tablero__celda--6 {
+  background-image: url("https://png.pngtree.com/element_origin_min_pic/16/07/10/21578247b5f14e0.jpg");
+  background-size: cover;
+  background-repeat: no-repeat; }
+
+.tablero__celda--19 {
+  background-image: url("https://images.vexels.com/media/users/3/78633/raw/5497463229c36ae24bc58a495d1081d6-dos-pisos-dibujo-de-la-casa.jpg");
+  background-size: cover;
+  background-repeat: no-repeat; }
+
+.tablero__celda--26,
+.tablero__celda--53 {
+  background-image: url("https://cdn5.dibujos.net/dibujos/pintar/dados.gif");
+  background-size: cover;
+  background-repeat: no-repeat; }
+
+.tablero__celda--42 {
+  background-image: url("https://www.educima.com/dibujo-para-colorear-laberinto-dm30187.jpg");
+  background-size: cover;
+  background-repeat: no-repeat; }
+
+.tablero__celda--52 {
+  background-image: url("https://st2.depositphotos.com/2654883/6376/v/950/depositphotos_63765695-stock-illustration-man-in-jail-holding-bars.jpg");
+  background-size: cover;
+  background-repeat: no-repeat; }
+
+.tablero__celda--58 {
+  background-image: url("https://www.educima.com/dibujo-para-colorear-calavera-dm16657.jpg");
+  background-size: cover;
+  background-repeat: no-repeat; }

@@ -1,4 +1,4 @@
-$celda-size: 3em;
+$celda-size: 5em;
 .tablero{
   display: grid;
   grid-template-columns: repeat(8, $celda-size);
@@ -7,4 +7,7 @@ $celda-size: 3em;
 .tablero__celda{
   background-color: var(--background);
   border: 1px solid red;
+}
+.tablero__celda--1{
+  grid-column: span 2;
 }

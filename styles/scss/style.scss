@@ -1,8 +1,13 @@
-@import "base/base";
+@import "config/mixins";
+@import "config/variables";
 
-@import "theme/variables";
 @import "theme/colors";
+
+@import "base/base";
 
 @import "layout/layout";
 
-@import "module/celdas";
+@import "components/celdas";
+
+
+

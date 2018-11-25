@@ -11,3 +11,8 @@ $celda-size: 5em;
 .tablero__celda--1{
   grid-column: span 2;
 }
+.dadoContainer{
+  width: 100%;
+  height: 10em;
+  background-color: lightcoral;
+}

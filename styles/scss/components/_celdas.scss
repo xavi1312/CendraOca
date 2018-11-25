@@ -1,3 +1,8 @@
+.tablero__celda{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;;
+}
 .tablero__celda--5,
 .tablero__celda--9,
 .tablero__celda--14,
@@ -12,25 +17,16 @@
 .tablero__celda--54,
 .tablero__celda--59,
 {
-  @include imagenFondo($oca_background);
-}
-.tablero__celda--6{
-  @include imagenFondo($puente_background);
+  background-color: var(--oca_background);
 }
 .tablero__celda--19{
-  @include imagenFondo($posada_background);
-}
-.tablero__celda--26,
-.tablero__celda--53
+  background-color: var(--posada_background);}
+.tablero__celda--42,
+.tablero__celda--6
 {
-  @include imagenFondo($dados_background);
-}
-.tablero__celda--42{
-  @include imagenFondo($laberinto_background);
-}
+  background-color: var(--puente_background);}
 .tablero__celda--52{
-  @include imagenFondo($carcel_background);
-}
+  background-color: var(--carcel_background);}
 .tablero__celda--58{
-  @include imagenFondo($muerte_background);
-}
+  color: white;
+  background-color: var(--muerte_background);}

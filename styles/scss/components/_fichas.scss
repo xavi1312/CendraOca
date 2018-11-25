@@ -1,0 +1,14 @@
+.celda__ficha{
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.celda__ficha--1{
+    background-color: lightcoral;
+}
+.celda__ficha--2{
+    background-color: lightgreen;
+}

@@ -23,12 +23,12 @@ span {
 
 .tablero {
   display: grid;
-  grid-template-columns: repeat(8, 3em);
-  grid-template-rows: repeat(8, 3em); }
+  grid-template-columns: repeat(8, 5em);
+  grid-template-rows: repeat(8, 5em); }
 
 .tablero__celda {
   background-color: var(--background);
-  border: 1px solid red; }
+  border: 1px solid yellow; }
 
 .tablero__celda--1 {
   grid-column: span 2; }

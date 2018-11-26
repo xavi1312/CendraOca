@@ -1,4 +1,4 @@
-$celda-size: 5em;
+$celda-size: 3em;
 .tablero{
   display: grid;
   grid-template-columns: repeat(8, $celda-size);

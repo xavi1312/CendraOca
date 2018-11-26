@@ -1,12 +1,12 @@
 :root {
-  --background: lightblue;
-  --oca_background: lightyellow;
-  --puente_background: blue;
+  --background:           lightblue;
+  --oca_background:       lightyellow;
+  --puente_background:    blue;
   --laberinto_background: brown;
-  --pozo_background: purple;
-  --muerte_background: black;
-  --carcel_background: gray;
-  --posada_background: red; }
+  --pozo_background:      purple;
+  --muerte_background:    black;
+  --carcel_background:    gray;
+  --posada_background:    red; }
 
 *,
 *:before,
@@ -23,8 +23,8 @@ span {
 
 .tablero {
   display: grid;
-  grid-template-columns: repeat(8, 5em);
-  grid-template-rows: repeat(8, 5em); }
+  grid-template-columns: repeat(8, 3em);
+  grid-template-rows: repeat(8, 3em); }
 
 .tablero__celda {
   background-color: var(--background);
@@ -65,8 +65,8 @@ span {
 .tablero__celda--19 {
   background-color: var(--posada_background); }
 
-.tablero__celda--42,
-.tablero__celda--6 {
+.tablero__celda--6,
+.tablero__celda--12 {
   background-color: var(--puente_background); }
 
 .tablero__celda--52 {
@@ -76,14 +76,26 @@ span {
   color: white;
   background-color: var(--muerte_background); }
 
+.tablero__celda--31 {
+  background-color: var(--pozo_background); }
+
 .dadoContainer__dado {
   width: 50px;
   height: 50px;
-  background-color: lightgreen; }
+  background-color: lightgreen;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
 
 .celda__ficha {
-  width: 1.5em;
-  height: 1.5em;
+  width: 1em;
+  height: 1em;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;

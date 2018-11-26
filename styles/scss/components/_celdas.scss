@@ -21,8 +21,8 @@
 }
 .tablero__celda--19{
   background-color: var(--posada_background);}
-.tablero__celda--42,
-.tablero__celda--6
+  .tablero__celda--6,
+.tablero__celda--12
 {
   background-color: var(--puente_background);}
 .tablero__celda--52{
@@ -30,3 +30,6 @@
 .tablero__celda--58{
   color: white;
   background-color: var(--muerte_background);}
+.tablero__celda--31{
+  background-color: var(--pozo_background);
+}

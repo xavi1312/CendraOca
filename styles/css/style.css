@@ -23,8 +23,8 @@ span {
 
 .tablero {
   display: grid;
-  grid-template-columns: repeat(8, 5em);
-  grid-template-rows: repeat(8, 5em); }
+  grid-template-columns: repeat(8, 3em);
+  grid-template-rows: repeat(8, 3em); }
 
 .tablero__celda {
   background-color: var(--background);
@@ -69,7 +69,7 @@ span {
 .tablero__celda--12 {
   background-color: var(--puente_background); }
 
-.tablero__celda--52 {
+.tablero__celda--56 {
   background-color: var(--carcel_background); }
 
 .tablero__celda--58 {

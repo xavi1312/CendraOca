@@ -19,61 +19,45 @@ class jugador {
   }
 
   getPenalizado() {
-    return this.penalizado;
+    let boolean = false;
+    if(this.penalizado != 0){
+      boolean = true;
+    }
+    return boolean;
   }
   setPenalizado(penalizado) {
     this.penalizado = penalizado;
   }
+  turnoPenalizacion(){
+    this.penalizado--;
+  }
 }
-var jugadorUno = new jugador();
-var jugadorDos = new jugador();
+var jugadorUno = new jugador(); var jugadorDos = new jugador();
 var turnoJugadorUno = true;
-var miInterval;
+var miInterval; var delay = 700;
 var limite;
-var delay = 1000;
+var contador=0;
 
-function moverDelante(ficha, jugador, dadoDelante) {
-  limite = jugador.getceldaActual() + dadoDelante;
-  miInterval = setInterval(function() {
-    var numero = jugador.getceldaActual() + 1;
-    $(ficha).appendTo($(".tablero__celda--" + numero));
-    jugador.setCeldaActual(numero);
-
-    if (jugador.getceldaActual() == limite) {
-      clearInterval(miInterval);
-      celdaEspecial(ficha, jugador);
-    }
-  }, delay);
-}
-function moverAtras(ficha, jugador, dadoAtras) {
-  limite = jugador.getceldaActual() - finAtras;
-  miInterval = setInterval(function() {
-    var numero = jugador.getceldaActual() - 1;
-
-    $(ficha).appendTo($(".tablero__celda--" + numero));
-    jugador.setCeldaActual(numero);
-
-    if (jugador.getceldaActual() == limite) {
-      clearInterval(miInterval);
-      celdaEspecial(ficha, jugador);
-    }
-  }, delay);
-}
 function nuevoTurno() {
-  var turno = jugadorUno;
-  var ficha = "#ficha1";
-  if (!turnoJugadorUno) {
+  var turno;
+  var ficha;
+  if(turnoJugadorUno && !jugadorUno.getPenalizado()){
+    turno = jugadorUno;
+    ficha = "#ficha1";
+  }else if (!turnoJugadorUno && !jugadorDos.getPenalizado()) {
     turno = jugadorDos;
     ficha = "#ficha2";
   }
   tirar(turno, ficha);
 }
+
 function tirar(jugador, ficha) {
   var numRan = jugador.tirarDado();
   $("#dado").text(numRan);
 
   mover(ficha, jugador, numRan);
 }
+
 function mover(ficha, jugador, fin) {
   var atras = false;
   const ultimaCelda = 63;
@@ -92,64 +76,107 @@ function mover(ficha, jugador, fin) {
     moverAtras(ficha,jugador, finAtras);
   }
 }
+
+function moverDelante(ficha, jugador, dadoDelante) {
+  limite = jugador.getceldaActual() + dadoDelante;
+  miInterval = setInterval(function() {
+    var numero = jugador.getceldaActual() + 1;
+    $(ficha).appendTo($(".tablero__celda--" + numero));
+    jugador.setCeldaActual(numero);
+
+    if (jugador.getceldaActual() == limite) {
+      clearInterval(miInterval);
+      celdaEspecial(ficha, jugador);
+    }
+  }, delay);
+}
+
+function moverAtras(ficha, jugador, dadoAtras) {
+  limite = jugador.getceldaActual() - dadoAtras;
+  miInterval = setInterval(function() {
+    var numero = jugador.getceldaActual() - 1;
+
+    $(ficha).appendTo($(".tablero__celda--" + numero));
+    jugador.setCeldaActual(numero);
+
+    if (jugador.getceldaActual() == limite) {
+      clearInterval(miInterval);
+      celdaEspecial(ficha, jugador);
+    }
+  }, delay);
+}
+
 function celdaEspecial(ficha, jugador) {
   var celda = jugador.getceldaActual();
-  switch (celda) {
-    case 5:
+  contador++;
+  if(contador < 2){
+    console.log(contador)
+    switch (celda) {
+      case 5:
       moverDelante(ficha, jugador, 4);
       break;
-    case 14:
+      case 14:
       moverDelante(ficha, jugador, 4);
       break;
-    case 23:
+      case 23:
       moverDelante(ficha, jugador, 4);
       break;
-    case 32:
+      case 32:
       moverDelante(ficha, jugador, 4);
       break;
-    case 41:
+      case 41:
       moverDelante(ficha, jugador, 4);
       break;
-    case 50:
+      case 50:
       moverDelante(ficha, jugador, 4);
       break;
-
-    case 9:
+      
+      case 9:
       moverDelante(ficha, jugador, 5);
       break;
-    case 18:
+      case 18:
       moverDelante(ficha, jugador, 5);
       break;
-    case 27:
+      case 27:
       moverDelante(ficha, jugador, 5);
       break;
-    case 36:
+      case 36:
       moverDelante(ficha, jugador, 5);
       break;
-    case 45:
+      case 45:
       moverDelante(ficha, jugador);
       break;
-    case 54:
+      case 54:
       moverDelante(ficha, jugador, 5);
       break;
-
-    case 6:
+      
+      case 6:
       moverDelante(ficha, jugador, 6);
       break;
-    case 12:
+      case 12:
       moverAtras(ficha, jugador, 6);
       break;
-
-    case 19:
+      
+      case 19:
       jugador.setPenalizado(1);
       break;
-
-    case 56:
+      
+      case 56:
       jugador.setPenalizado(2);
       break;
-
-    case 58:
+      
+      case 58:
       moverAtras(ficha, jugador, 57);
       break;
+      default:  if(turnoJugadorUno){turnoJugadorUno = false}else{turnoJugadorUno = true}
+    }
+  }else{
+    console.log("canvio")
+    contador =0;
+    if(turnoJugadorUno){
+      turnoJugadorUno = false;
+    }else{
+      turnoJugadorUno = true;
+    }
   }
 }

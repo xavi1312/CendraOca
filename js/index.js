@@ -1,11 +1,10 @@
 $(document).ready(function() {
   $("#dado").on("click", nuevoTurno);
-  $("#in").on("click", miInterval);
 });
 
 class jugador {
-  constructor(actual) {
-    this.celdaActual = actual;
+  constructor() {
+    this.celdaActual = 1;
     this.penalizado = 0;
   }
   tirarDado() {
@@ -16,23 +15,50 @@ class jugador {
     return this.celdaActual;
   }
   setCeldaActual(nuevaCelda) {
-    this.celdaActual = nuevaCelda;
+    this.celdaActual = Number.parseInt(nuevaCelda);
   }
 
   getPenalizado() {
     return this.penalizado;
   }
   setPenalizado(penalizado) {
-    this.penalizado += penalizado;
+    this.penalizado = penalizado;
   }
 }
-var jugadorUno = new jugador(1);
-var jugadorDos = new jugador(1);
+var jugadorUno = new jugador();
+var jugadorDos = new jugador();
 var turnoJugadorUno = true;
 var miInterval;
 var limite;
+var delay = 1000;
 
+function moverDelante(ficha, jugador, dadoDelante) {
+  limite = jugador.getceldaActual() + dadoDelante;
+  miInterval = setInterval(function() {
+    var numero = jugador.getceldaActual() + 1;
+    $(ficha).appendTo($(".tablero__celda--" + numero));
+    jugador.setCeldaActual(numero);
 
+    if (jugador.getceldaActual() == limite) {
+      clearInterval(miInterval);
+      celdaEspecial(ficha, jugador);
+    }
+  }, delay);
+}
+function moverAtras(ficha, jugador, dadoAtras) {
+  limite = jugador.getceldaActual() - finAtras;
+  miInterval = setInterval(function() {
+    var numero = jugador.getceldaActual() - 1;
+
+    $(ficha).appendTo($(".tablero__celda--" + numero));
+    jugador.setCeldaActual(numero);
+
+    if (jugador.getceldaActual() == limite) {
+      clearInterval(miInterval);
+      celdaEspecial(ficha, jugador);
+    }
+  }, delay);
+}
 function nuevoTurno() {
   var turno = jugadorUno;
   var ficha = "#ficha1";
@@ -47,46 +73,23 @@ function tirar(jugador, ficha) {
   $("#dado").text(numRan);
 
   mover(ficha, jugador, numRan);
-  celdaEspecial(ficha, jugador);
 }
 function mover(ficha, jugador, fin) {
-    var atras = false;
-    const ultimaCelda = 63;
-    var finAtras = 0;
-    if(jugador.getceldaActual()+fin > ultimaCelda){
-        finAtras = (jugador.getceldaActual() + fin) - ultimaCelda;
-        fin = fin - finAtras;
-        atras = true;
-    }
-    
-    limite = Number.parseInt(jugador.getceldaActual()) + fin;
-    miInterval = setInterval(moverDelante(ficha, jugador, fin),1000);
-    if(atras){
-    moverAtras(ficha, jugador, finAtras);
+  var atras = false;
+  const ultimaCelda = 63;
+  var finAtras = 0;
+
+  // si la dau + actual més gran que 63
+  if (jugador.getceldaActual() + fin > ultimaCelda) {
+    finAtras = jugador.getceldaActual() + fin - ultimaCelda;
+    fin = fin - finAtras;
+    atras = true;
   }
-}
-function moverDelante(ficha, jugador, fin) {
-    var numero = (Number.parseInt(jugador.getceldaActual()) + 1);
 
-    $(ficha).appendTo($(".tablero__celda--" + numero));
-    jugador.setCeldaActual(numero);
-    
-    if(jugador.getceldaActual() == limite){clearInterval(miInterval)}
-/*for (let i = 0; i < fin; i++) {
-    var numero = +(Number.parseInt(jugador.getceldaActual()) + 1);
+  moverDelante(ficha, jugador, fin);
 
-    $(ficha).appendTo($(".tablero__celda--" + numero));
-    jugador.setCeldaActual(numero);
-    console.log(numero);
-  }*/
-}
-function moverAtras(ficha, jugador, finAtras) {
-  console.log(finAtras);
-  for (let i = finAtras; i > 0; i--) {
-    var numero = (Number.parseInt(jugador.getceldaActual()) - 1);
-
-    $(ficha).appendTo($(".tablero__celda--" + numero));
-    jugador.setCeldaActual(numero);
+  if (atras) {
+    moverAtras(ficha,jugador, finAtras);
   }
 }
 function celdaEspecial(ficha, jugador) {
@@ -124,7 +127,7 @@ function celdaEspecial(ficha, jugador) {
       moverDelante(ficha, jugador, 5);
       break;
     case 45:
-      moverDelante(ficha, jugador, 5);
+      moverDelante(ficha, jugador);
       break;
     case 54:
       moverDelante(ficha, jugador, 5);
@@ -149,16 +152,4 @@ function celdaEspecial(ficha, jugador) {
       moverAtras(ficha, jugador, 57);
       break;
   }
-}
-
-
-
-var contador =0;
-function miInterval(){
-    miInterval = setInterval(casella, 1000);
-}
-function casella(){
-    contador++;
-    console.log(contador);
-    if(contador == 10){clearInterval(miInterval)};
 }

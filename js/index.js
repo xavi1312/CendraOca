@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $("#dado").on("click", nuevoTurno);
+  $('#jugador').html("Torn del jugador 1");
 });
 
 class jugador {
@@ -26,6 +27,7 @@ class jugador {
     return boolean;
   }
   setPenalizado(penalizado) {
+    console.log("penalitzat")
     this.penalizado = penalizado;
   }
   turnoPenalizacion() {
@@ -51,17 +53,18 @@ function nuevoTurno() {
       ficha = "#ficha1";
       tirar(turno, ficha);
     } else {
-      console.log("penalitzat 1");
       jugadorUno.turnoPenalizacion();
+      cambioJugador();
     }
-  } else if (!turnoJugadorUno) {
+  } 
+  if (!turnoJugadorUno) {
     if (!jugadorDos.getPenalizado()) {
       turno = jugadorDos;
       ficha = "#ficha2";
       tirar(turno, ficha);
     } else {
-      console.log("penalitzat 2");
       jugadorDos.turnoPenalizacion();
+      cambioJugador();
     }
   }
 }
@@ -135,7 +138,6 @@ function moverAtras(ficha, jugador, dadoAtras, especial) {
 
     $(ficha).appendTo($(".tablero__celda--" + numero));
     jugador.setCeldaActual(numero);
-    console.log(numero);
 
     if (jugador.getceldaActual() == limite) {
       clearInterval(miInterval);
@@ -150,8 +152,10 @@ function moverAtras(ficha, jugador, dadoAtras, especial) {
 
 function cambioJugador(){
   if (turnoJugadorUno) {
+    $('#jugador').html("Torn del jugador 2");
     turnoJugadorUno = false;
   } else {
+    $('#jugador').html("Torn del jugador 1");
     turnoJugadorUno = true;
   }
 }
@@ -206,11 +210,15 @@ function celdaEspecial(ficha, jugador) {
       break;
 
     case 19:
-      jugador.setPenalizado(1);
+      jugador.setPenalizado(1); cambioJugador();
+      break;
+
+    case 31:
+      jugador.setPenalizado(1); cambioJugador();
       break;
 
     case 56:
-      jugador.setPenalizado(2);
+      jugador.setPenalizado(2); cambioJugador();
       break;
 
     case 58:

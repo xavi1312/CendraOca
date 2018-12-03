@@ -1,0 +1,12 @@
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body {
+  margin: 0; }
+
+span {
+  width: 100%;
+  margin: 5px; }

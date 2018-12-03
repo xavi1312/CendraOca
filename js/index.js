@@ -20,7 +20,7 @@ class jugador {
 
   getPenalizado() {
     let boolean = false;
-    if(this.penalizado != 0){
+    if (this.penalizado != 0) {
       boolean = true;
     }
     return boolean;
@@ -28,27 +28,42 @@ class jugador {
   setPenalizado(penalizado) {
     this.penalizado = penalizado;
   }
-  turnoPenalizacion(){
+  turnoPenalizacion() {
     this.penalizado--;
   }
 }
-var jugadorUno = new jugador(); var jugadorDos = new jugador();
+var jugadorUno = new jugador();
+var jugadorDos = new jugador();
 var turnoJugadorUno = true;
-var miInterval; var delay = 700;
+var miInterval;
+var delay = 300;
 var limite;
-var contador=0;
+var contador = 0;
 
 function nuevoTurno() {
   var turno;
   var ficha;
-  if(turnoJugadorUno && !jugadorUno.getPenalizado()){
-    turno = jugadorUno;
-    ficha = "#ficha1";
-  }else if (!turnoJugadorUno && !jugadorDos.getPenalizado()) {
-    turno = jugadorDos;
-    ficha = "#ficha2";
+  console.log(" ");
+
+  if (turnoJugadorUno) {
+    if (!jugadorUno.getPenalizado()) {
+      turno = jugadorUno;
+      ficha = "#ficha1";
+      tirar(turno, ficha);
+    } else {
+      console.log("penalitzat 1");
+      jugadorUno.turnoPenalizacion();
+    }
+  } else if (!turnoJugadorUno) {
+    if (!jugadorDos.getPenalizado()) {
+      turno = jugadorDos;
+      ficha = "#ficha2";
+      tirar(turno, ficha);
+    } else {
+      console.log("penalitzat 2");
+      jugadorDos.turnoPenalizacion();
+    }
   }
-  tirar(turno, ficha);
 }
 
 function tirar(jugador, ficha) {
@@ -70,15 +85,24 @@ function mover(ficha, jugador, fin) {
     atras = true;
   }
 
-  moverDelante(ficha, jugador, fin);
+  moverDelante(ficha, jugador, fin, false);
 
   if (atras) {
-    moverAtras(ficha,jugador, finAtras);
+    moverAtras(ficha, jugador, finAtras, false);
   }
 }
 
-function moverDelante(ficha, jugador, dadoDelante) {
+function moverDelante(ficha, jugador, dadoDelante, especial) {
   limite = jugador.getceldaActual() + dadoDelante;
+  console.log(
+    jugador.getceldaActual() +
+      " -->    " +
+      dadoDelante +
+      "     " +
+      ficha +
+      " --  " +
+      limite
+  );
   miInterval = setInterval(function() {
     var numero = jugador.getceldaActual() + 1;
     $(ficha).appendTo($(".tablero__celda--" + numero));
@@ -86,97 +110,112 @@ function moverDelante(ficha, jugador, dadoDelante) {
 
     if (jugador.getceldaActual() == limite) {
       clearInterval(miInterval);
-      celdaEspecial(ficha, jugador);
+      if (!especial) {
+        celdaEspecial(ficha, jugador);
+      }else{
+        cambioJugador();
+      }
     }
   }, delay);
 }
 
-function moverAtras(ficha, jugador, dadoAtras) {
+function moverAtras(ficha, jugador, dadoAtras, especial) {
   limite = jugador.getceldaActual() - dadoAtras;
+  console.log(
+    jugador.getceldaActual() +
+      " <--    " +
+      dadoAtras +
+      "     " +
+      ficha +
+      " --  " +
+      limite
+  );
   miInterval = setInterval(function() {
     var numero = jugador.getceldaActual() - 1;
 
     $(ficha).appendTo($(".tablero__celda--" + numero));
     jugador.setCeldaActual(numero);
+    console.log(numero);
 
     if (jugador.getceldaActual() == limite) {
       clearInterval(miInterval);
-      celdaEspecial(ficha, jugador);
+      if (!especial) {
+        celdaEspecial(ficha, jugador);
+      }else{
+        cambioJugador();
+      }
     }
   }, delay);
 }
 
+function cambioJugador(){
+  if (turnoJugadorUno) {
+    turnoJugadorUno = false;
+  } else {
+    turnoJugadorUno = true;
+  }
+}
+
 function celdaEspecial(ficha, jugador) {
   var celda = jugador.getceldaActual();
-  contador++;
-  if(contador < 2){
-    console.log(contador)
-    switch (celda) {
-      case 5:
-      moverDelante(ficha, jugador, 4);
+
+  switch (celda) {
+    case 5:
+      moverDelante(ficha, jugador, 4, true);
       break;
-      case 14:
-      moverDelante(ficha, jugador, 4);
+    case 14:
+      moverDelante(ficha, jugador, 4, true);
       break;
-      case 23:
-      moverDelante(ficha, jugador, 4);
+    case 23:
+      moverDelante(ficha, jugador, 4, true);
       break;
-      case 32:
-      moverDelante(ficha, jugador, 4);
+    case 32:
+      moverDelante(ficha, jugador, 4, true);
       break;
-      case 41:
-      moverDelante(ficha, jugador, 4);
+    case 41:
+      moverDelante(ficha, jugador, 4, true);
       break;
-      case 50:
-      moverDelante(ficha, jugador, 4);
+    case 50:
+      moverDelante(ficha, jugador, 4, true);
       break;
-      
-      case 9:
-      moverDelante(ficha, jugador, 5);
+
+    case 9:
+      moverDelante(ficha, jugador, 5, true);
       break;
-      case 18:
-      moverDelante(ficha, jugador, 5);
+    case 18:
+      moverDelante(ficha, jugador, 5, true);
       break;
-      case 27:
-      moverDelante(ficha, jugador, 5);
+    case 27:
+      moverDelante(ficha, jugador, 5, true);
       break;
-      case 36:
-      moverDelante(ficha, jugador, 5);
+    case 36:
+      moverDelante(ficha, jugador, 5, true);
       break;
-      case 45:
-      moverDelante(ficha, jugador);
+    case 45:
+      moverDelante(ficha, jugador, 5, true);
       break;
-      case 54:
-      moverDelante(ficha, jugador, 5);
+    case 54:
+      moverDelante(ficha, jugador, 5, true);
       break;
-      
-      case 6:
-      moverDelante(ficha, jugador, 6);
+
+    case 6:
+      moverDelante(ficha, jugador, 6, true);
       break;
-      case 12:
-      moverAtras(ficha, jugador, 6);
+    case 12:
+      moverAtras(ficha, jugador, 6, true);
       break;
-      
-      case 19:
+
+    case 19:
       jugador.setPenalizado(1);
       break;
-      
-      case 56:
+
+    case 56:
       jugador.setPenalizado(2);
       break;
-      
-      case 58:
-      moverAtras(ficha, jugador, 57);
+
+    case 58:
+      moverAtras(ficha, jugador, 57, true);
       break;
-      default:  if(turnoJugadorUno){turnoJugadorUno = false}else{turnoJugadorUno = true}
-    }
-  }else{
-    console.log("canvio")
-    contador =0;
-    if(turnoJugadorUno){
-      turnoJugadorUno = false;
-    }else{
-      turnoJugadorUno = true;
-    }
+    default: cambioJugador();
   }
 }
